@@ -7,7 +7,7 @@ Attributes:
     staff_members(list): List of staff members working in this department.    
 """
 
-class Department(hospital):
+class Department():
     def __init__(self,name):
         self.name = name
         self.patients = {}
