@@ -7,11 +7,12 @@ Attributes:
     staff_members(list): List of staff members working in this department.    
 """
 
-class Department:
+class Department(hospital):
     def __init__(self,name):
         self.name = name
-        self.patients = []
-        self.staff_members = []
+        self.patients = {}
+        self.staff_members = {}
+        
         
     def __repr__(self):
         return f"Department Name : {self.name}, Patients: {len(self.patients)}, Staff_Members: {len(self.staff_members)}"  
@@ -23,11 +24,12 @@ class Department:
         Args:
             patient (Patient): The patient object to be added.
         """    
-        if patient not in self.patients:
-            self.patients.append(patient)
-            return "Patient Added Successfully!"
-        else:
+        if patient.id in self.patients:
             return "The Patient Already Exists."
+        else:
+            self.patients[patient.id] = patient
+            return "Patient Added Successfully!"
+      
         
     def add_staff(self,staff_member):
         """
@@ -36,8 +38,9 @@ class Department:
         Args:
             staff_member (Staff): The staff member object to be added.
         """
-        if staff_member not in self.staff_members:
-            self.staff_members.append(staff_member)
-            return "Staff Member Added Successfully!"
-        else:
+        if staff_member.id in self.staff_members:
             return "Staff Member Already Exists."
+        else:
+            self.staff_members[staff_member.id] = staff_member
+            return "Staff Member Added Successfully!"
+        

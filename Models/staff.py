@@ -10,32 +10,25 @@ Staff types are handled using the 'role' attribute
 (e.g., Doctor, Nurse, Admin, Technician)
 """
 
+from person import Person
+
 # List to store all staff members
 staff_list = []
 
 
-class Staff:
+class Staff(Person):
     """
-    Staff Class
-    -----------
     Represents a staff member in the hospital.
+    Inherits from Person and adds staff-specific attributes.
     """
 
-    def __init__(self, staff_id, name, age, role, department, salary):
+    def __init__(self, staff_id: int, name: str, age: int,role: str, department: str, salary: float):
         """
         Initialize a staff object.
-
-        Parameters:
-        staff_id (int): Unique ID for the staff member
-        name (str): Staff member name
-        age (int): Staff member age
-        role (str): Staff role (Doctor, Nurse, Admin, Technician)
-        department (str): Department name
-        salary (float): Monthly salary
         """
+        super().__init__(name, age)
+
         self.staff_id = staff_id
-        self.name = name
-        self.age = age
         self.role = role
         self.department = department
         self.salary = salary
@@ -52,12 +45,9 @@ class Staff:
         print(f"Salary     : {self.salary}")
 
 
-def add_staff(staff):
+def add_staff(staff: Staff):
     """
     Add a new staff member to the staff list.
-
-    Parameters:
-    staff (Staff): Staff object to be added
     """
     staff_list.append(staff)
     print("Staff member added successfully.")
@@ -76,12 +66,9 @@ def view_all_staff():
         print("-" * 40)
 
 
-def search_staff_by_id(staff_id):
+def search_staff_by_id(staff_id: int):
     """
     Search for a staff member using staff ID.
-
-    Parameters:
-    staff_id (int): ID to search for
     """
     for staff in staff_list:
         if staff.staff_id == staff_id:
@@ -90,27 +77,21 @@ def search_staff_by_id(staff_id):
     print("Staff member not found.")
 
 
-def remove_staff(staff_id):
+def remove_staff(staff_id: int):
     """
     Remove a staff member from the staff list using staff ID.
-
-    Parameters:
-    staff_id (int): ID of the staff member to remove
     """
-    for staff in staff_list:
+    for i, staff in enumerate(staff_list):
         if staff.staff_id == staff_id:
-            staff_list.remove(staff)
+            del staff_list[i]
             print("Staff member removed successfully.")
             return
     print("Staff member not found.")
 
 
-def view_staff_by_role(role):
+def view_staff_by_role(role: str):
     """
     Display staff members filtered by role.
-
-    Parameters:
-    role (str): Role to filter by (Doctor, Nurse, Admin, Technician)
     """
     found = False
     for staff in staff_list:
