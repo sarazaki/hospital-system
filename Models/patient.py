@@ -1,9 +1,11 @@
-from .person import person
+from .person import Person
+
 """
-    This class represents a patient in the hospital system.
-    It inherits from the Person class and extends it by adding
-    a medical record specific to the patient.
+This class represents a patient in the hospital system.
+It inherits from the Person class and extends it by adding
+a medical record specific to the patient.
 """
+
 class Patient(Person):
 
     def __init__(self, name: str, age: int, medical_record: str):
@@ -21,7 +23,7 @@ class Patient(Person):
         # Initialize the patient-specific attribute
         self.medical_record = medical_record
 
-    def view_record(self) :
+    def view_record(self):
         """
         Returns the medical record of the patient.
 

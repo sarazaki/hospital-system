@@ -18,7 +18,6 @@ def main():
 
     hospital = Hospital("Smart Hospital")
 
-
     while True:
 
         show_menu()
@@ -34,7 +33,6 @@ def main():
             dept = Department(name)
 
             print(hospital.add_department(dept))
-
 
         # ===============================
         # Add Patient
@@ -57,7 +55,6 @@ def main():
 
             print(dept.add_patient(patient))
 
-
         # ===============================
         # Add Staff
         # ===============================
@@ -76,10 +73,9 @@ def main():
             role = input("Role: ")
             salary = float(input("Salary: "))
 
-            staff = Staff(name, age, role, salary)
+            staff = Staff(name, age, role, dept_name, salary)
 
             print(dept.add_staff(staff))
-
 
         # ===============================
         # View Departments
@@ -102,7 +98,6 @@ def main():
                 for s in dept.staff_members.values():
                     print(f"- {s.id} | {s.name} ({s.role})")
 
-
         # ===============================
         # Exit
         # ===============================
@@ -110,7 +105,6 @@ def main():
 
             print("System closed.")
             break
-
 
         else:
             print("Invalid choice.")
