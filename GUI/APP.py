@@ -22,7 +22,7 @@ from PySide6.QtWidgets import (
     QPushButton, QLabel, QFrame, QLineEdit,
     QTextEdit, QComboBox, QTableWidget, QTableWidgetItem,
     QHeaderView, QMessageBox, QStackedWidget,
-    QFormLayout, QSpinBox, QDoubleSpinBox
+    QFormLayout, QSpinBox, QDoubleSpinBox, QScrollArea
 )
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
@@ -36,7 +36,9 @@ class HospitalGUI(QMainWindow):
         self.hospital = Hospital("Smart Hospital")
         
         self.setWindowTitle("Hospital Management System")
-        self.setFixedSize(1400, 900)
+        # INCREASED WINDOW SIZE
+        self.setMinimumSize(1600, 1000)
+        self.resize(1600, 1000)
         
         # Modern color palette
         self.colors = {
@@ -69,7 +71,7 @@ class HospitalGUI(QMainWindow):
         self.content_stack = QStackedWidget()
         self.content_stack.setStyleSheet(f"background-color: {self.colors['bg']};")
         
-        # Create different pages
+        # Create different pages with scroll areas
         self.dashboard_page = self.create_dashboard_page()
         self.departments_page = self.create_departments_page()
         self.patients_page = self.create_patients_page()
@@ -209,6 +211,11 @@ class HospitalGUI(QMainWindow):
         self.update_stats()
     
     def create_dashboard_page(self):
+        # Create scroll area for dashboard
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setStyleSheet("background-color: transparent; border: none;")
+        
         page = QWidget()
         layout = QVBoxLayout()
         layout.setSpacing(25)
@@ -319,9 +326,15 @@ class HospitalGUI(QMainWindow):
         layout.addWidget(activity_widget, 1)
         
         page.setLayout(layout)
-        return page
+        scroll.setWidget(page)
+        return scroll
     
     def create_departments_page(self):
+        # Create scroll area
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setStyleSheet("background-color: transparent; border: none;")
+        
         page = QWidget()
         layout = QVBoxLayout()
         layout.setSpacing(25)
@@ -384,7 +397,7 @@ class HospitalGUI(QMainWindow):
         form_card.setLayout(form_layout)
         layout.addWidget(form_card)
         
-        # Departments Table
+        # Departments Table - INCREASED HEIGHT
         table_card = QWidget()
         table_card.setStyleSheet(f"""
             background-color: {self.colors['card']};
@@ -401,6 +414,8 @@ class HospitalGUI(QMainWindow):
         self.dept_table.setColumnCount(4)
         self.dept_table.setHorizontalHeaderLabels(["Name", "Patients", "Staff", "Actions"])
         self.dept_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # INCREASED TABLE HEIGHT
+        self.dept_table.setMinimumHeight(400)
         self.dept_table.setStyleSheet(f"""
             QTableWidget {{
                 border: none;
@@ -426,9 +441,15 @@ class HospitalGUI(QMainWindow):
         layout.addWidget(table_card, 1)
         
         page.setLayout(layout)
-        return page
+        scroll.setWidget(page)
+        return scroll
     
     def create_patients_page(self):
+        # Create scroll area
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setStyleSheet("background-color: transparent; border: none;")
+        
         page = QWidget()
         layout = QVBoxLayout()
         layout.setSpacing(25)
@@ -538,7 +559,7 @@ class HospitalGUI(QMainWindow):
         form_card.setLayout(form_layout)
         layout.addWidget(form_card)
         
-        # Patients Table
+        # Patients Table - INCREASED HEIGHT
         table_card = QWidget()
         table_card.setStyleSheet(f"""
             background-color: {self.colors['card']};
@@ -555,6 +576,8 @@ class HospitalGUI(QMainWindow):
         self.patient_table.setColumnCount(5)
         self.patient_table.setHorizontalHeaderLabels(["ID", "Name", "Age", "Department", "Medical Record"])
         self.patient_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # INCREASED TABLE HEIGHT
+        self.patient_table.setMinimumHeight(400)
         self.patient_table.setStyleSheet(f"""
             QTableWidget {{
                 border: none;
@@ -579,9 +602,15 @@ class HospitalGUI(QMainWindow):
         layout.addWidget(table_card, 1)
         
         page.setLayout(layout)
-        return page
+        scroll.setWidget(page)
+        return scroll
     
     def create_staff_page(self):
+        # Create scroll area
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setStyleSheet("background-color: transparent; border: none;")
+        
         page = QWidget()
         layout = QVBoxLayout()
         layout.setSpacing(25)
@@ -695,7 +724,7 @@ class HospitalGUI(QMainWindow):
         form_card.setLayout(form_layout)
         layout.addWidget(form_card)
         
-        # Staff Table
+        # Staff Table - INCREASED HEIGHT
         table_card = QWidget()
         table_card.setStyleSheet(f"""
             background-color: {self.colors['card']};
@@ -712,6 +741,8 @@ class HospitalGUI(QMainWindow):
         self.staff_table.setColumnCount(6)
         self.staff_table.setHorizontalHeaderLabels(["ID", "Name", "Age", "Role", "Department", "Salary"])
         self.staff_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        # INCREASED TABLE HEIGHT
+        self.staff_table.setMinimumHeight(400)
         self.staff_table.setStyleSheet(f"""
             QTableWidget {{
                 border: none;
@@ -736,7 +767,8 @@ class HospitalGUI(QMainWindow):
         layout.addWidget(table_card, 1)
         
         page.setLayout(layout)
-        return page
+        scroll.setWidget(page)
+        return scroll
     
     def create_page_header(self, title, subtitle):
         header = QWidget()
