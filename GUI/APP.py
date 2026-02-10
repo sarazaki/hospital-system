@@ -1,9 +1,20 @@
 import sys
 import os
 
-# Add the project root directory to Python path
+# Get the directory where this script is located (GUI folder)
 current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
+
+# Get the parent directory (hospital-system folder) where Core and Models are located
+parent_dir = os.path.dirname(current_dir)
+
+# Add the parent directory to Python path
+sys.path.insert(0, parent_dir)
+
+# Now these imports will work
+from Core.hospital import Hospital
+from Models.department import Department
+from Models.patient import Patient
+from Models.staff import Staff
 
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget,
@@ -16,11 +27,6 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QFont
 
-# Now these imports should work
-from Core.hospital import Hospital
-from Models.department import Department
-from Models.patient import Patient
-from Models.staff import Staff
 
 class HospitalGUI(QMainWindow):
     def __init__(self):
